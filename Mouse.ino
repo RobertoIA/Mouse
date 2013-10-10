@@ -11,12 +11,12 @@ int angle = 90; // current servo angle.
 int dir = 0; // current servo direction.
 
 void setup() {
-  servo.attach(SERVO_PIN);
   servo.write(angle);
+  servo.attach(SERVO_PIN);
 }
 
 void loop() {
-  //test_movement();
+  test_movement();
 }
 
 // DEBUG
