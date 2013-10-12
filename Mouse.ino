@@ -23,9 +23,11 @@ void setup() {
 void loop() {
   if(detects_movement()) {
     digitalWrite(LED_PIN, HIGH);
+    move_fast();
   }
   else {
     digitalWrite(LED_PIN, LOW);
+    move_slow();
   }
 
   //test_movement();
