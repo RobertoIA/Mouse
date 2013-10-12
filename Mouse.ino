@@ -23,11 +23,11 @@ void setup() {
 void loop() {
   if(detects_movement()) {
     digitalWrite(LED_PIN, HIGH);
-    move_fast();
+    move_servo(FAST_DELAY);
   }
   else {
     digitalWrite(LED_PIN, LOW);
-    move_slow();
+    move_servo(SLOW_DELAY);
   }
 
   //test_movement();
@@ -36,26 +36,16 @@ void loop() {
 // DEBUG
 void test_movement() {
   for(int i = 0; i < 100; i++)
-    move_fast();
+    move_servo(FAST_DELAY);
   for(int i = 0; i < 100; i++)
-    move_slow();
+    move_servo(SLOW_DELAY);
 }
 
 boolean detects_movement() {
   return analogRead(PIR_PIN) >= 200;
 }
 
-void move_fast() {
-  move_servo();
-  delay(FAST_DELAY);
-}
-
-void move_slow() {
-  move_servo();
-  delay(SLOW_DELAY);
-}
-
-void move_servo() {
+void move_servo(int servo_delay) {
   if(dir == 0) {
     angle += 1;
     if(angle >= CENTER + LAT_ANGLE) dir = 1;
@@ -65,6 +55,7 @@ void move_servo() {
     if(angle <= CENTER - LAT_ANGLE) dir = 0;
   }
   servo.write(angle);
+  delay(servo_delay);
 }
 
 
