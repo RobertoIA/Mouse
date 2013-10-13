@@ -7,7 +7,7 @@
 #define CENTER 90
 #define LAT_ANGLE 10
 #define FAST_DELAY 20
-#define SLOW_DELAY 50
+#define SLOW_DELAY 100
 
 Servo servo;
 int PIR_val = 0;
@@ -42,7 +42,7 @@ void test_movement() {
 }
 
 boolean detects_movement() {
-  return analogRead(PIR_PIN) >= 200;
+  return analogRead(PIR_PIN) != LOW;
 }
 
 void move_servo(int servo_delay) {
