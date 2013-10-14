@@ -1,7 +1,7 @@
 #include <Servo.h>
 
-#define SERVO_PIN 0
-#define PIR_PIN 0 // Analog pin 0
+#define SERVO_PIN 10
+#define PIR_PIN 11
 #define LED_PIN 13
 
 #define CENTER 90
@@ -15,9 +15,18 @@ int angle = 90; // current servo angle.
 int dir = 0; // current servo direction.
 
 void setup() {
+  pinMode(PIR_PIN, INPUT);
   pinMode(LED_PIN, OUTPUT);
   servo.write(angle);
   servo.attach(SERVO_PIN);
+
+  delay(15000);
+  for(int i = 0; i < 10; i++) {
+    digitalWrite(LED_PIN, HIGH);
+    delay(100);
+    digitalWrite(LED_PIN, LOW);
+    delay(100);
+  }
 }
 
 void loop() {
@@ -42,7 +51,7 @@ void test_movement() {
 }
 
 boolean detects_movement() {
-  return analogRead(PIR_PIN) != LOW;
+  return digitalRead(PIR_PIN) == HIGH;
 }
 
 void move_servo(int servo_delay) {
@@ -57,6 +66,7 @@ void move_servo(int servo_delay) {
   servo.write(angle);
   delay(servo_delay);
 }
+
 
 
 
